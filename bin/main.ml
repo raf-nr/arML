@@ -6,4 +6,4 @@
 
 [@@@ocaml.text "/*"]
 
-let () = print_endline "СОСАТЬ АМЕРИКА"
+let () = print_endline "Hello world"
