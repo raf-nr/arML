@@ -1,0 +1,3 @@
+(library
+ (name arML_lib)
+ (public_name arML.Lib))
