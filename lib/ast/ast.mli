@@ -12,6 +12,22 @@ type constant =
   | CUnit of unit (** () *)
 [@@deriving show { with_path = false }]
 
+type ground_type_defenition = 
+  | AInt (** Int type (x: int) *)
+  | ABool (** Bool type (x: bool) *)
+  | AUnit (** Unit type (x: unit) *)
+  | AChar (** Char type (x: char) *)
+  | AString (** String type (x: string) *)
+[@@deriving show { with_path = false }]
+
+type type_defenition =
+  | APolymorphic of identifier (* Polymorphic type (x: 'a) *)
+  | AGround of ground_type_defenition (* Int, Bool, Char, etc type *)
+  | AArrow of type_defenition * type_defenition (* Function type (f: (int -> int)) *)
+  | ATuple of type_defenition list (* Tuple type (x: (int, bool)) *)
+  | AList of type_defenition (* List type (x: int list) *)
+[@@deriving show { with_path = false }]
+
 type pattern =
   | PAny (* Wildcard: '_' *)
   | PNill (* Empty: '[]' *)
