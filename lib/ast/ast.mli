@@ -53,3 +53,16 @@ type expression =
   | ERecLetIn of pattern * expression * expression (** Recursive let in: 'let rec f x = if x = 1 then 1 else x + f (x-1)'*)
   | ETyped of expression * type_defenition (** Assigning a type to an expression: (expr : int) *)
 [@@deriving show { with_path = false }]
+
+type declaration = 
+  | DOrdinary of pattern * expression (** Top-level let-binding: 'let f x = x' *)
+  | DRecursive of pattern * expression (** Top-level recursive let-binding: 'let rec f x = ...' *)
+[@@deriving show { with_path = false }]
+
+type structure_item =
+  | SExpression of expression (** Any expression: '5+3', 'let f x = x in f 0' *)
+  | SDeclaration of declaration (** Top-level non-recursive or recursive let-binding *)
+[@@deriving show { with_path = false }]
+
+type program = structure_item list [@@deriving show { with_path = false }]
+(** The entire parsed code of the program *)
