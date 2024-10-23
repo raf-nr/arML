@@ -36,6 +36,7 @@ type pattern =
   | POr of pattern * pattern (** 'P1 | P2' *)
   | PTuple of pattern list (** Tuple of patterns: '(P1, P2, P3)' *)
   | PListConstructor of pattern * pattern (** List construction pattern: 'P1::P2' *)
+  | EPattern of pattern * type_defenition (** Assigning a type to a pattern: (P : int) *)
 [@@deriving show { with_path = false }]
 
 type expression =
@@ -50,4 +51,5 @@ type expression =
   | EMatchWith of expression * (pattern * expression) list (** Pattern matching: match x with | y -> y *)
   | ELetIn of pattern * expression * expression (** Let in: 'let f x = x in f 5 *)
   | ERecLetIn of pattern * expression * expression (** Recursive let in: 'let rec f x = if x = 1 then 1 else x + f (x-1)'*)
+  | ETyped of expression * type_defenition (** Assigning a type to an expression: (expr : int) *)
 [@@deriving show { with_path = false }]
